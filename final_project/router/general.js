@@ -21,38 +21,62 @@ public_users.post("/register", (req,res) => {
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
-  
-  return res.json(JSON.parse(JSON.stringify(books)))
+    let promise = new Promise((resolve,reject)=>{
+        resolve("done")
+    })
+    promise.then((message)=>{
+        return res.json(JSON.parse(JSON.stringify(books)))
+    })
 });
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
   let ISBN=req.params.isbn
-  return res.json(JSON.parse(JSON.stringify(books[ISBN])))
+  let promise = new Promise((resolve,reject)=>{
+    resolve("done")
+})
+    promise.then((message)=>{
+        console.log(message)
+    return res.json(JSON.parse(JSON.stringify(books[ISBN])))
+})
+  
  });
   
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
   let author=req.params.author
-  let result
-    for (let i = 1; i < Object.keys(books).length; i++) {
-        if(author==books[i].author){
-            result=books[i]
+  let promise = new Promise((resolve,reject)=>{
+    resolve("done")
+    })
+    promise.then((message)=>{
+        console.log(message)
+        let result
+        for (let i = 1; i < Object.keys(books).length; i++) {
+            if(author==books[i].author){
+                result=books[i]
+            }
         }
-    }
-    return res.json(result)
+        return res.json(result)
+})
+  
 });
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
     let title=req.params.title
     let result
-    for (let i = 1; i < Object.keys(books).length; i++) {
-        if(title==books[i].title){
-            result=books[i]
-        }
-    }
-    return res.json(result)
+    let promise = new Promise((resolve,reject)=>{
+        resolve("done")
+        })
+        promise.then((message)=>{
+            console.log(message)
+            for (let i = 1; i < Object.keys(books).length; i++) {
+                if(title==books[i].title){
+                    result=books[i]
+                }
+            }
+            return res.json(result)
+    })
 });
 
 //  Get book review
